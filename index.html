@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>90-дневный план: питание + тренировки</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --bg: #f3f5f9;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --line: #dce2ec;
+      --accent: #1f5fbf;
+      --accent-2: #0f766e;
+      --warn: #b45309;
+      --danger: #b91c1c;
+      --cyr: #163a8a;
+      --lat: #a15c00;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #eef3fb 0%, #f7f8fb 100%);
+      color: var(--text);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 14px 12px 34px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(243, 245, 249, 0.86);
+      border-bottom: 1px solid rgba(220, 226, 236, 0.8);
+      padding: 10px 0 12px;
+      margin: 0 -12px 14px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    details.settings {
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 10px 12px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    }
+
+    details.settings summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    label.field {
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfcfe;
+      font-size: 16px;
+      color: var(--text);
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(31, 95, 191, 0.12);
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text);
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+
+    .check input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
+      user-select: none;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(31, 95, 191, 0.22);
+    }
+
+    .btn.teal {
+      background: var(--accent-2);
+      border-color: var(--accent-2);
+      color: #fff;
+    }
+
+    .btn.warn {
+      background: #fff7ed;
+      border-color: #fed7aa;
+      color: #9a3412;
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0;
+    }
+
+    .nav select {
+      min-width: 120px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 16px 20px;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      background: #eef4ff;
+      color: var(--accent);
+      border: 1px solid #cfe0ff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .card h2 {
+      margin: 4px 0 2px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    section {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    section:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    section h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #334155;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .macro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .macro {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .macro b {
+      display: block;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .macro span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .note {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 16px;
+      padding: 12px;
+      color: #713f12;
+      font-size: 14px;
+    }
+
+    .note.safe {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .actions .full {
+      grid-column: 1 / -1;
+    }
+
+    .help {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    .cyr { color: var(--cyr); }
+    .lat { color: var(--lat); }
+
+    @media (min-width: 520px) {
+      .settings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .settings-grid .full {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media print {
+      .topbar, .actions, .help, details.settings { display: none !important; }
+      body { background: #fff; }
+      .wrap { max-width: none; padding: 0; }
+      .card { box-shadow: none; border: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="title-row">
+        <div>
+          <h1>90 дней: питание + тренировки</h1>
+          <div class="subtitle">Карточки на каждый день • PNG • Google Calendar</div>
+        </div>
+      </div>
+
+      <details class="settings" open>
+        <summary>Настройки</summary>
+        <div class="settings-grid">
+          <label class="field">
+            Вес, кг
+            <input id="weight" type="number" min="35" max="250" step="0.1" value="80" />
+          </label>
+
+          <label class="field">
+            Пол
+            <select id="sex">
+              <option value="female" selected>женский</option>
+              <option value="male">мужской</option>
+            </select>
+          </label>
+
+          <label class="field full">
+            Дата старта
+            <input id="startDate" type="date" value="2026-11-09" />
+          </label>
+
+          <div class="check full">
+            <input id="lactating" type="checkbox" />
+            <label for="lactating">Грудное вскармливание</label>
+          </div>
+
+          <div class="check full">
+            <input id="kneePain" type="checkbox" checked />
+            <label for="kneePain">Боль / ограничения в коленях</label>
+          </div>
+
+          <div class="full">
+            <button class="btn primary" onclick="applySettings()">Применить и пересчитать</button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="nav">
+      <button class="btn" onclick="prevDay()">← Назад</button>
+      <select id="daySelect" onchange="jumpDay(this.value)"></select>
+      <button class="btn" onclick="nextDay()">Вперёд →</button>
+    </div>
+
+    <article id="card" class="card" aria-live="polite"></article>
+
+    <div class="actions">
+      <button id="btnPng" class="btn teal">Скачать PNG</button>
+      <button id="btnCopy" class="btn">Скопировать текст</button>
+      <button id="btnGcal" class="btn warn">В Google Календарь</button>
+      <button id="btnIcs" class="btn primary full">Скачать .ics на 90 дней</button>
+    </div>
+
+    <div class="help">
+      <b>Импорт в Google Calendar:</b> нажмите «Скачать .ics», затем в Google Calendar откройте
+      Настройки → Импорт и экспорт → выберите файл. События будут ежедневными, с полным текстом карточки.<br><br>
+      <b>PNG:</b> сохраняется текущая карточка в высоком качестве.<br><br>
+      <b>Мобильная навигация:</b> свайп по карточке влево/вправо, кнопки и выпадающий список дней.
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_DAYS = 90;
+
+    const state = {
+      day: 1,
+      weight: 80,
+      sex: 'female',
+      lactating: false,
+      kneePain: true,
+      startDate: '2026-11-09'
+    };
+
+    let currentDayData = null;
+
+    const volumeByWeek = [2, 3, 3, 2, 3, 4, 4, 3, 2, 4, 4, 3, 3];
+    const rpeByWeek = [6, 7, 7, 6, 7, 8, 8, 7, 6, 8, 8, 8, 7];
+    const stepsByWeek = [7000, 7500, 8500, 8000, 9000, 9500, 10000, 9000, 10000, 10000, 10500, 10000, 10000];
+
+    const tips = [
+      'Замеры: вес, талия, фото, обхваты. Не взвешивайтесь чаще 1 раза в неделю.',
+      'Белок в каждый приём пищи: ладонь мяса/рыбы/яйец/творога/бобовых.',
+      'Сон 7–9 часов. Ложитесь и вставайте примерно в одно время.',
+      'Клетчатка: минимум 2 порции овощей в обед и ужин.',
+      'Вода: около 30 мл/кг в сутки, стакан за 15–20 минут до еды.',
+      'Ходьба 10–15 минут после каждого основного приёма пищи.',
+      'Meal prep: сварите крупу, нарежьте овощи, разложите белок по контейнерам.',
+      'Замените сладкий напиток на воду/чай без сахара.',
+      'Ешьте медленно 15–20 минут, отложите телефон.',
+      'После переедания не наказывайте себя голодом — просто вернитесь к плану.',
+      'Проверьте технику приседа: вес на средней части стопы, колени в сторону носка.',
+      'Прогрессия: добавьте 1–2 повторения или 1–2,5 кг, но не всё сразу.',
+      'Управляйте стрессом: 4-7-8 дыхание или спокойная прогулка 5 минут.',
+      'Омега-3 принимайте с жирной пищей или капсулой во время еды.',
+      'Если сильный голод: сначала белок + овощи, затем углеводы.',
+      'Не пропускайте плановые приёмы пищи; интервальное питание — только осознанно.',
+      'Соль регулируйте по самочувствию/давлению, без крайностей.',
+      'Алкоголь ухудшает сон и восстановление. Лучше 0, на празднике — максимум 1 бокал.',
+      'Боль в колене: уменьшите глубину/вес, замените движение на безболезненное.',
+      'Не гонитесь за «жиросжигателями»: дефицит, белок, сон и силовые дают 80% результата.',
+      'Плато часто от недосыпа, стресса или скрытых калорий: масла, соусы, напитки.',
+      'Углеводы вокруг тренировки помогают силе; вписывайте их в суточную норму.',
+      'После тренировки 5–10 минут мягкой растяжки/мобильности.',
+      'Взвешивайтесь утром натощак после туалета, сравнивайте среднее за 7 дней.',
+      'Если вес уходит быстрее 1% в неделю и падает сила — добавьте 100–150 ккал.',
+      'Если 2 недели нет движения: урежьте 5–10% калорий ИЛИ добавьте 1000 шагов.',
+      'Добавки не заменяют базу: калории, белок, тренировки, сон.',
+      'Праздник: ешьте до, берите белок/овощи, алкоголь чередуйте с водой.',
+      'Проверьте витамин D, B12, ферритин, ТТГ при усталости, одышке, выпадении волос.',
+      'Фиксируйте не только вес: энергия, сон, обхваты, рабочие веса, настроение.'
+    ];
+
+    function pad(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function parseLocalDate(iso) {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function isoLocal(d) {
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    }
+
+    function icsLocal(d) {
+      return isoLocal(d).replace(/-/g, '');
+    }
+
+    function ruDate(d) {
+      return d.toLocaleDateString('ru-RU', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function getPhase(day) {
+      if (day <= 28) return { name: 'Фаза 1: Фундамент', short: 'Фундамент' };
+      if (day <= 56) return { name: 'Фаза 2: Жиросжигание', short: 'Жиросжигание' };
+      if (day <= 84) return { name: 'Фаза 3: Рекомпозиция', short: 'Рекомпозиция' };
+      return { name: 'Фаза 3+: Закрепление', short: 'Закрепление' };
+    }
+
+    function calcMacros(week) {
+      const w = Number(state.weight) || 80;
+      const maintenance = Math.round(w * (state.sex === 'male' ? 33 : 31));
+
+      let deficit = 0.10;
+      if (week >= 5 && week <= 8) deficit = 0.15;
+      if (week === 9) deficit = 0;
+      if (week >= 10 && week <= 12) deficit = 0.12;
+      if (week === 13) deficit = 0.08;
+
+      let target;
+      let deficitLabel;
+
+      if (state.lactating) {
+        const lactationAdd = 330;
+        const allowedDeficit = week === 9 ? 0 : Math.min(Math.round(maintenance * 0.07), 250);
+        target = maintenance + lactationAdd - allowedDeficit;
+        deficitLabel = week === 9 ? 'поддержка при ГВ' : 'мягкий дефицит при ГВ';
+      } else {
+        target = Math.round(maintenance * (1 - deficit));
+        deficitLabel = Math.round(deficit * 100) + '%';
+      }
+
+      const minCalories = state.lactating ? 1800 : (state.sex === 'male' ? 1500 : 1200);
+      target = Math.max(target, minCalories);
+
+      const proteinFactor = state.lactating ? 1.6 : 1.8;
+      let protein = Math.min(200, Math.round(w * proteinFactor));
+      let fat = Math.round(w * (state.lactating ? 1.0 : 0.9));
+      let carb = Math.round((target - protein * 4 - fat * 9) / 4);
+
+      const minCarb = state.lactating ? 130 : 80;
+      if (carb < minCarb) {
+        carb = minCarb;
+        const remaining = target - protein * 4 - carb * 4;
+        fat = Math.max(Math.round(remaining / 9), Math.round(w * 0.5));
+      }
+
+      protein = Math.round(protein / 5) * 5;
+      fat = Math.round(fat / 5) * 5;
+      carb = Math.round(carb / 5) * 5;
+      target = Math.round(target / 10) * 10;
+
+      return {
+        target,
+        protein,
+        fat,
+        carb,
+        maintenance,
+        deficitLabel
+      };
+    }
+
+    function getRepScheme(week) {
+      if (week <= 3) return '8–12';
+      if (week === 4) return '8–10';
+      if (week <= 7) return '6–10';
+      if (week === 8) return '8–12';
+      if (week === 9) return '8–10';
+      if (week === 10) return '4–6';
+      if (week === 11) return '10–15';
+      if (week === 12) return '6–8';
+      return '8–12';
+    }
+
+    function getWorkout(dow, week, sets, rpe) {
+      const reps = getRepScheme(week);
+      const kneeRule = state.kneePain
+        ? 'Колени: работайте в безболезненной амплитуде; при щелчках/давлении уменьшите глубину или вес.'
+        : 'Колени: направляйте в сторону носка, не заваливайте внутрь, не через боль.';
+
+      if (dow === 0) {
+        return {
+          title: 'Силовая A: ноги + тяги + кор',
+          items: [
+            'Разминка 5–8 мин: велосипед/эллипс, мобильность тазобедренных и голеностопов.',
+            `Приседания в ящик или жим ногами: ${sets}×${reps}, RPE ${rpe}. ${kneeRule}`,
+            `Румынская тяга с гантелями: ${sets}×10–12, акцент на заднюю поверхность бедра.`,
+            `Тяга верхнего блока или горизонтальная тяга: ${sets}×10–15.`,
+            `Ягодичный мост / толчок бёдрами: ${sets}×12–15.`,
+            'Планка: 3×20–40 секунд.',
+            state.kneePain
+              ? 'Завершение: подъёмы на носки 2×15 + мёртвый жук 2×8/сторона.'
+              : 'Завершение: шаги на низкую тумбу 2×10 на ногу + подъёмы на носки 2×15.'
+          ]
+        };
+      }
+
+      if (dow === 1) {
+        return {
+          title: 'Ходьба + мобильность',
+          items: [
+            `Шаги: ${stepsByWeek[week - 1] || 10000}+.`,
+            '10–15 минут мобильности: тазобедренные, грудной отдел, голеностопы.',
+            'Прогулка после ужина 15–20 минут.',
+            'Лёгкая растяжка 5–10 минут, без боли.'
+          ]
+        };
+      }
+
+      if (dow === 2) {
+        return {
+          title: 'Силовая B: верх тела',
+          items: [
+            'Разминка: вращения руками, лопатками, 5 минут лёгкого кардио.',
+            `Жим гантелей лёжа или отжимания с возвышения: ${sets}×8–12.`,
+            `Тяга верхнего блока: ${sets}×10–15.`,
+            `Жим гантелей сидя нейтральным хватом: ${sets}×10–12.`,
+            'Лицевая тяга: 3×15–20 для плеч и осанки.',
+            'Мёртвый жук: 3×8–12 на сторону.',
+            'По желанию: бицепс/трицепс 2×12–15, если есть восстановление.'
+          ]
+        };
+      }
+
+      if (dow === 3) {
+        let cardio;
+        if (week < 5) {
+          cardio = 'Ровное низкоударное кардио 20 минут: велосипед/эллипс/бассейн, пульс разговорный.';
+        } else if (week <= 6) {
+          cardio = 'Ровное кардио 20–25 минут, RPE 5–6.';
+        } else if (week === 7) {
+          cardio = 'Интервалы: 6×1 минута быстро / 2 минуты медленно, велосипед или эллипс.';
+        } else if (week === 8) {
+          cardio = 'Ровное кардио 25 минут + 5 минут мобильности.';
+        } else if (week === 9) {
+          cardio = 'Восстановительное кардио 15–20 минут, легко.';
+        } else if (week === 10) {
+          cardio = 'Интервалы: 8×45 секунд быстро / 2 минуты медленно.';
+        } else if (week === 11) {
+          cardio = 'Ровное кардио 30 минут, RPE 6–7.';
+        } else if (week === 12) {
+          cardio = 'Тест: 20 минут при RPE 7 или 6×30 секунд на велосипеде с отдыхом 90 секунд.';
+        } else {
+          cardio = 'Лёгкая активность 20–30 минут.';
+        }
+
+        return {
+          title: 'Кардио низкого удара + кор',
+          items: [
+            cardio,
+            'Мёртвый жук: 3×8–12/сторона.',
+            'Птица-собака: 3×8–10/сторона.',
+            'Боковая планка: 2–3×20–30 секунд/сторона.',
+            state.kneePain
+              ? 'Если колено реагирует на кардио: замените на бассейн, велотренажёр с низкой нагрузкой или верхотренажёр.'
+              : 'Держите нагрузку такой, чтобы могли говорить короткими фразами.'
+          ]
+        };
+      }
+
+      if (dow === 4) {
+        return {
+          title: 'Силовая C: full body + ягодицы',
+          items: [
+            'Разминка 5–8 минут + активация ягодиц: мост без веса 2×15.',
+            `Тяга трэп-грифа или ягодичный толчок со штангой: ${sets}×${week === 10 ? '4–6' : '6–10'}, RPE ${rpe}.`,
+            `Жим гантелей лёжа: ${sets}×8–12.`,
+            `Тяга в упоре грудью: ${sets}×10–12.`,
+            'Сгибания ног на тренажёре: 3×12–15.',
+            'Боковая планка: 3×20–30 секунд/сторона.',
+            'Прогулка фермера: 3×30 метров.'
+          ]
+        };
+      }
+
+      if (dow === 5) {
+        return {
+          title: 'Активное восстановление',
+          items: [
+            'Прогулка 40–60 минут в комфортном темпе.',
+            'Мобильность/йога 15–20 минут.',
+            'Лёгкая растяжка задней поверхности бедра, сгибателей бедра, груди.',
+            'Подготовка еды на следующую неделю по желанию.'
+          ]
+        };
+      }
+
+      return {
+        title: 'Отдых + планирование',
+        items: [
+          'Полный отдых от тяжёлых нагрузок.',
+          'Шаги по желанию, без насилия.',
+          'Проверите план питания, закупите продукты.',
+          'Сон важнее дополнительной тренировки.',
+          'Замер веса/талии 1 раз в неделю, лучше утром натощак.'
+        ]
+      };
+    }
+
+    function getSupplements(week) {
+      const arr = [
+        'Омега-3: 1000–2000 мг EPA+DHA с едой.',
+        'Витамин D3: 1000–2000 МЕ утром с жиром; дозу лучше корректировать по анализу 25(OH)D.',
+        'Клетчатка/псиллиум: 5–10 г, если не набираете 25–35 г из еды; запивать 250–300 мл воды.',
+        'Магний глицинат/цитрат: 200–400 мг вечером; при болезнях почек — только с врачом.'
+      ];
+
+      if (state.lactating) {
+        arr.push('При ГВ: без кофеина, жиросжигателей, креатина и L-карнитина без согласования с врачом.');
+        arr.push('Белковый порошок, творог, рыба, яйца — безопасные источники белка.');
+      } else {
+        arr.push('Креатин моногидрат: 3–5 г ежедневно, опционально; при заболеваниях почек — врач.');
+        if (week >= 5) {
+          arr.push('Кофеин: 100–200 мг за 30–60 минут до тренировки, не позднее чем за 8–10 часов до сна.');
+          arr.push('L-карнитин: 1–2 г за 30–60 минут до тренировки, опционально; эффект скромный.');
+        }
+        arr.push('Не смешивайте несколько жиросжигателей/стимуляторов одновременно.');
+      }
+
+      return arr;
+    }
+
+    function getNote(day, week) {
+      if (day === 1) {
+        return 'Старт. Сделайте замеры: вес, талия, бёдра, фото. Сверьте назначенный препарат из Kaiser: «1 таблетка за 30 минут до утреннего приёма пищи дважды в день, 30 дней» — это лекарство, не БАД. Если есть острая боль/отёк/блок в колене — сначала ортопед/травматолог.';
+      }
+      if (day === 7) {
+        return 'Первая неделя завершена. Сравните средний вес за 7 дней, а не один день. Если дефицит слишком жёсткий: слабость, головокружение, срывы — добавьте 100–150 ккал за счёт белка/углеводов.';
+      }
+      if (day === 28) {
+        return 'Контрольная точка 1. Ожидаемая потеря: примерно 2–4% массы тела за месяц, безопасно 0,5–1% в неделю. Если сила падает, сон плохой, голод дикий — увеличьте калории на 5–10% и добавьте шаги, а не кардио.';
+      }
+      if (day === 56) {
+        return 'Контрольная точка 2. Если вес встал 2 недели: измените одну переменную: −5–10% калорий ИЛИ +1000 шагов ИЛИ +1 подход в силовой. Не делайте всё сразу.';
+      }
+      if (day === 85) {
+        return 'Переход к закреплению. Не бросайте силовые. Вернитесь к поддержке: калории около maintenance ±5%. Планируйте следующий цикл: 4–8 недель мягкого дефицита или 8–12 недель набора мышечной массы без лишнего жира.';
+      }
+      if (state.lactating && day % 14 === 0) {
+        return 'Контроль ГВ: следите за объёмом молока, самочувствием и весом ребёнка. Не опускайтесь ниже 1800 ккал. Любые стимуляторы/жиросжигатели/высокие дозы добавок — только после врача и проверки совместимости.';
+      }
+      if (state.kneePain && day % 7 === 0) {
+        return 'Контроль колена: отёк, усиление боли, блокирование, нестабильность — повод снизить нагрузку и обратиться к врачу. Замените присед/выпады на жим ногами с маленькой амплитудой, ягодичный мост, вертикальные тяги, велосипед без сопротивления.';
+      }
+      if (week === 9) {
+        return 'Неделя поддержки/разгрузки. Это не «срыв», а управление метаболизмом и психикой. Держите белок, силовые лёгкие, шаги обычные.';
+      }
+      return tips[(day - 1) % tips.length];
+    }
+
+    function dayData(day) {
+      const start = parseLocalDate(state.startDate);
+      const date = addDays(start, day - 1);
+      const dow = (date.getDay() + 6) % 7; // Monday = 0
+      const week = Math.ceil(day / 7);
+      const phase = getPhase(day);
+      const sets = volumeByWeek[clamp(week - 1, 0, volumeByWeek.length - 1)] || 3;
+      const rpe = rpeByWeek[clamp(week - 1, 0, rpeByWeek.length - 1)] || 7;
+      const steps = stepsByWeek[clamp(week - 1, 0, stepsByWeek.length - 1)] || 10000;
+      const macros = calcMacros(week);
+      const workout = getWorkout(dow, week, sets, rpe);
+      const supplements = getSupplements(week);
+      const focus = tips[(day - 1) % tips.length];
+      const note = getNote(day, week);
+
+      return {
+        day,
+        date,
+        dow,
+        week,
+        phase,
+        sets,
+        rpe,
+        steps,
+        macros,
+        workout,
+        supplements,
+        focus,
+        note
+      };
+    }
+
+    function plainDescription(d) {
+      const water = Math.round((Number(state.weight) || 80) * 30);
+      return [
+        `День ${d.day}/90. ${ruDate(d.date)}`,
+        `Фаза: ${d.phase.name}, неделя ${d.week}`,
+        `Фокус: ${d.focus}`,
+        `Питание: ${d.macros.target} ккал; белок ${d.macros.protein} г; жиры ${d.macros.fat} г; углеводы ${d.macros.carb} г. Дефицит/режим: ${d.macros.deficitLabel}.`,
+        `Вода: ~${water} мл/сутки + дополнительно при тренировке/жаре.`,
+        `Тренировка: ${d.workout.title}`,
+        d.workout.items.map(x => '• ' + x).join('\n'),
+        `Шаги: ${d.steps}+. Сон: 7–9 часов.`,
+        `Добавки: ${d.supplements.join(' | ')}`,
+        `Заметка: ${d.note}`
+      ].join('\n\n');
+    }
+
+    function render() {
+      const d = dayData(state.day);
+      currentDayData = d;
+
+      const card = document.getElementById('card');
+      const water = Math.round((Number(state.weight) || 80) * 30);
+
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="badge">День ${d.day}/90</span>
+          <span class="date">${ruDate(d.date)}</span>
+        </div>
+
+        <h2>${d.phase.name}</h2>
+        <div class="meta">Неделя ${d.week} • ${d.workout.title}</div>
+
+        <section>
+          <h3>Фокус дня</h3>
+          <p>${d.focus}</p>
+        </section>
+
+        <section>
+          <h3>Питание</h3>
+          <div class="macro-grid">
+            <div class="macro"><b>${d.macros.target}</b><span>ккал</span></div>
+            <div class="macro"><b>${d.macros.protein}</b><span>белок, г</span></div>
+            <div class="macro"><b>${d.macros.fat}</b><span>жиры, г</span></div>
+            <div class="macro"><b>${d.macros.carb}</b><span>углеводы, г</span></div>
+          </div>
+          <ul>
+            <li>Режим: ${d.macros.deficitLabel}. Поддерживающие калории ориентировочно: ${d.macros.maintenance} ккал.</li>
+            <li>Белок: распределите на 3–5 приёмов. Источники: птица, рыба, яйца, творог/греческий йогурт, бобовые, протеин.</li>
+            <li>Овощи: 2–4 порции в день. Клетчатка: зелень, капуста, огурцы, помидоры, бобовые, отруби/псиллиум при необходимости.</li>
+            <li>Углеводы: гречка, рис, овсянка, картофель, бобовые. Лучше вокруг тренировки и в первой половине дня, но общий итог важнее времени.</li>
+            <li>Жиры: оливковое/льняное масло, орехи, авокадо, жирная рыба. Не обрезайте жиры слишком сильно.</li>
+            <li>Вода: ~${water} мл/сутки + 300–500 мл на тренировку.</li>
+            ${state.lactating ? '<li>Грудное вскармливание: не опускайтесь ниже 1800 ккал, без агрессивных дефицитов и стимуляторов.</li>' : ''}
+          </ul>
+        </section>
+
+        <section>
+          <h3>Тренировка</h3>
+          <ul>
+            ${d.workout.items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </section>
+
+        <section>
+          <h3>Активность и восстановление</h3>
+          <ul>
+            <li>Шаги: ${d.steps}+.</li>
+            <li>Сон: 7–9 часов. Отбой и подъём尽量 в одно время.</li>
+            <li>Стресс: 5 минут дыхания, прогулка, запись мыслей.</li>
+            <li>Боль: 0–3/10 допустима при силовых; выше — снижайте амплитуду/вес.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Добавки</h3>
+          <ul>
+            ${d.supplements.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </section>
+
+        <section class="${d.day === 1 || d.day === 28 || d.day === 56 || d.day === 85 ? 'note' : 'note safe'}">
+          <h3>Медицинская / практическая заметка</h3>
+          <p>${d.note}</p>
+        </section>
+      `;
+
+      colorize(card);
+
+      document.getElementById('daySelect').value = String(d.day);
+      document.getElementById('btnPng').onclick = downloadPng;
+      document.getElementById('btnCopy').onclick = copyText;
+      document.getElementById('btnGcal').onclick = openGoogleCalendar;
+      document.getElementById('btnIcs').onclick = downloadIcs;
+    }
+
+    function colorize(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(node => {
+        const text = node.nodeValue;
+        if (!/[\u0400-\u04FFA-Za-z]/.test(text)) return;
+
+        const frag = document.createDocumentFragment();
+        Array.from(text).forEach(ch => {
+          if (/[\u0400-\u04FF]/.test(ch)) {
+            const span = document.createElement('span');
+            span.className = 'cyr';
+            span.textContent = ch;
+            frag.appendChild(span);
+          } else if (/[A-Za-z]/.test(ch)) {
+            const span = document.createElement('span');
+            span.className = 'lat';
+            span.textContent = ch;
+            frag.appendChild(span);
+          } else {
+            frag.appendChild(document.createTextNode(ch));
+          }
+        });
+
+        node.parentNode.replaceChild(frag, node);
+      });
+    }
+
+    function prevDay() {
+      state.day = clamp(state.day - 1, 1, TOTAL_DAYS);
+      render();
+    }
+
+    function nextDay() {
+      state.day = clamp(state.day + 1, 1, TOTAL_DAYS);
+      render();
+    }
+
+    function jumpDay(value) {
+      state.day = clamp(parseInt(value, 10) || 1, 1, TOTAL_DAYS);
+      render();
+    }
+
+    function applySettings() {
+      state.weight = parseFloat(document.getElementById('weight').value) || 80;
+      state.sex = document.getElementById('sex').value;
+      state.startDate = document.getElementById('startDate').value || '2026-11-09';
+      state.lactating = document.getElementById('lactating').checked;
+      state.kneePain = document.getElementById('kneePain').checked;
+      state.day = 1;
+      render();
+    }
+
+    function downloadBlob(filename, text, type) {
+      const blob = new Blob([text], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function downloadPng() {
+      const card = document.getElementById('card');
+      if (!window.html2canvas) {
+        alert('Библиотека html2canvas не загрузилась. Проверьте интернет и обновите страницу.');
+        return;
+      }
+      html2canvas(card, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        useCORS: true
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `День-${state.day}-план.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    function copyText() {
+      if (!currentDayData) return;
+      navigator.clipboard.writeText(plainDescription(currentDayData)).then(() => {
+        alert('Текст дня скопирован.');
+      }).catch(() => {
+        prompt('Скопируйте текст вручную:', plainDescription(currentDayData));
+      });
+    }
+
+    function icsEscape(text) {
+      return String(text)
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/\r?\n/g, '\\n');
+    }
+
+    function buildIcs() {
+      const now = new Date();
+      const stamp = now.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Brin90Plan//RU',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH'
+      ];
+
+      for (let i = 1; i <= TOTAL_DAYS; i++) {
+        const d = dayData(i);
+        const start = icsLocal(d.date);
+        const end = icsLocal(addDays(d.date, 1));
+        const summary = icsEscape(`День ${d.day}: ${d.phase.short} — ${d.workout.title}`);
+        const description = icsEscape(plainDescription(d));
+
+        lines.push(
+          'BEGIN:VEVENT',
+          `UID:brin90-${i}-${start}@plan.local`,
+          `DTSTAMP:${stamp}`,
+          `DTSTART;VALUE=DATE:${start}`,
+          `DTEND;VALUE=DATE:${end}`,
+          `SUMMARY:${summary}`,
+          `DESCRIPTION:${description}`,
+          'TRANSP:TRANSPARENT',
+          'END:VEVENT'
+        );
+      }
+
+      lines.push('END:VCALENDAR');
+      return lines.join('\r\n');
+    }
+
+    function downloadIcs() {
+      downloadBlob('brin-90-days-plan.ics', buildIcs(), 'text/calendar;charset=utf-8');
+    }
+
+    function googleCalendarUrl(d) {
+      const start = icsLocal(d.date);
+      const end = icsLocal(addDays(d.date, 1));
+      const text = `День ${d.day}: ${d.phase.short} — ${d.workout.title}`;
+      const details = plainDescription(d).slice(0, 1800);
+      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(text)}&dates=${start}/${end}&details=${encodeURIComponent(details)}`;
+    }
+
+    function openGoogleCalendar() {
+      if (!currentDayData) return;
+      window.open(googleCalendarUrl(currentDayData), '_blank');
+    }
+
+    function initDaySelect() {
+      const sel = document.getElementById('daySelect');
+      sel.innerHTML = '';
+      for (let i = 1; i <= TOTAL_DAYS; i++) {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = `День ${i}`;
+        sel.appendChild(opt);
+      }
+    }
+
+    function initSwipe() {
+      const card = document.getElementById('card');
+      let startX = 0;
+      let endX = 0;
+
+      card.addEventListener('touchstart', e => {
+        startX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      card.addEventListener('touchend', e => {
+        endX = e.changedTouches[0].screenX;
+        const diff = endX - startX;
+        if (Math.abs(diff) > 55) {
+          if (diff < 0) nextDay();
+          else prevDay();
+        }
+      }, { passive: true });
+    }
+
+    initDaySelect();
+    initSwipe();
+    render();
+  </script>
+</body>
+</html>
